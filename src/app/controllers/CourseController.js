@@ -8,6 +8,19 @@ class CourseController {
             .then(course => res.render('course-detail', { course: course }))
             .catch(error => next(error));
     }
+
+    // GET detail coure /course/add
+    addGet(req, res, next) {
+        res.render('form-add');
+    }
+
+    // POST detail coure /course/add
+    async addPost(req, res, next) {
+        const course = new Course(req.body);
+        await course.save()
+            .then(() => res.redirect("../home"))
+            .catch(error => next(error));
+    }
 }
 
 module.exports = new CourseController;

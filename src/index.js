@@ -4,8 +4,16 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const route = require('./routes');
 const dbConfig = require('./config/db/index');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+
+app.use(bodyParser.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    }),
+);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

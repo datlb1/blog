@@ -1,19 +1,19 @@
 <div class="row mt-4">
     <div class="col-4">
         <div class="card">
-            <a href="/course/{{course.slug}}"><img src="{{course.image}}" class="card-img-top" alt="..."> </img> </a>
             <div class="card-body">
-                <a class="link-underline link-underline-opacity-0" href="/course/{{course.slug}}">
-                    <h5 class="card-title">{{course.name}}</h5>
-                </a>
+                <h5 class="card-title">{{course.name}}</h5>
                 <p class="card-text">{{course.description}}</p>
-                <a href="/course/{{course.slug}}" class="btn btn-primary">Buy course</a>
+                <p class="card-text">{{course.description}}</p>
+                <p class="card-text">{{course.description}}</p>
+                <div class="d-flex justify-content-center">
+                    <a href="/course/{{course.slug}}" class="btn btn-warning">Học ngay</a>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-8">
-        <iframe src=" https://www.youtube.com/embed/R6plN3FvzFY?si=mdlhELYd-yqT-gb-" title="YouTube video player"
-            frameborder="0"
+        <iframe src="https://www.youtube.com/embed/{{course.videoId}}" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
     </div>

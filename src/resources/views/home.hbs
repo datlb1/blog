@@ -3,14 +3,13 @@
 
     <div class="col">
         <div class="card">
-            <img src="{{image}}" class="card-img-top" alt="...">
+            <a href="/course/{{slug}}"><img src="{{image}}" class="card-img-top" alt="..."> </img> </a>
             <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
+                <a class="link-underline link-underline-opacity-0" href="/course/{{slug}}">
+                    <h5 class="card-title">{{name}}</h5>
+                </a>
                 <p class="card-text">{{description}}</p>
-                {{!-- <div class="d-flex justify-content-center"> --}}
-                    <a href="#" class="btn btn-primary">Buy course</a>
-                    {{!--
-                </div> --}}
+                <a href="/course/{{slug}}" class="btn btn-primary">Buy course</a>
             </div>
         </div>
     </div>

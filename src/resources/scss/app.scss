@@ -1,7 +1,4 @@
 @import '_variable.scss';
-h1 {
-    color: $red-color;
-}
 
 .height {
     height: 100vh;
@@ -11,3 +8,7 @@ iframe {
     width: 100%;
     aspect-ratio: 16 / 9;
   }
+
+td, th{
+    vertical-align: middle;
+}

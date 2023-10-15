@@ -23,7 +23,13 @@ app.use(morgan('combined'));
 // Templete engine
 app.engine('.hbs', hbs.engine(
     {
-        extname: '.hbs'
+        extname: '.hbs',
+        helpers: {
+            indexBase: index => index + 1,
+            dateFormat: date => {
+                return date.toLocaleString("en-GB");
+            },
+        }
     }));
 
 app.set('view engine', '.hbs');

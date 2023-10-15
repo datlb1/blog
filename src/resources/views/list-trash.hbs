@@ -1,4 +1,4 @@
-<h4 class="text-center mt-4">Danh sách khóa học</h4>
+<h4 class="text-center mt-4">Thùng rác</h4>
 <div class="container d-flex justify-content-center">
     <table class="table mt-3">
         <thead>
@@ -6,7 +6,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Video Id</th>
-                <th scope="col">Ngày chỉnh sửa</th>
+                <th scope="col">Ngày xóa</th>
                 <th scope="col">Thao tác</th>
             </tr>
         </thead>
@@ -18,17 +18,15 @@
                     <td>{{name}}</td>
                     <td>{{videoId}}</td>
                     <td>
-                        {{#if updatedAt}}
-                        {{dateFormat updatedAt}}
-                        {{else if createdAt}}
-                        {{dateFormat createdAt}}
+                        {{#if deletedAt}}
+                        {{dateFormat deletedAt}}
                         {{/if}}
                     </td>
                     <td>
-                        <a class="me-3 btn btn-warning" href="edit/{{_id}}">Sửa</a>
                         <!-- Button trigger modal -->
                         <button onclick="confirmFunction('{{name}}', '{{_id}}')" id="modalButton" type="button"
-                            class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Xóa</button>
+                            class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#restore-modal">Khôi
+                            phục</button>
                     </td>
                 </tr>
             </div>
@@ -37,24 +35,25 @@
     </table>
 </div>
 {{#unless courses}}
-<p class="text-center">Bạn chưa đăng ký khóa học nào.</p>
+<p class="text-center">Thùng rác trống.</p>
 {{/unless}}
-{{!-- delete form --}}
-<form id="form-delete" method="POST"></form>
+
+{{!-- restore form --}}
+<form id="form-restore" method="POST"></form>
 
 <!-- Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modalLabel" aria-hidden="true">
+<div class="modal fade" id="restore-modal" tabindex="-1" aria-labelledby="restore-modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="delete-modalLabel">Xóa khóa học</h1>
+                <h1 class="modal-title fs-5" id="restore-modalLabel">Khôi phục khóa học</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="modal-body" class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button id="confirm-delete" type="button" class="btn btn-danger">Xóa</button>
+                <button id="confirm-restore" type="button" class="btn btn-primary">Khôi phục</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
             </div>
         </div>
@@ -64,13 +63,13 @@
 
 <script>
     function confirmFunction(name, _id) {
-        document.getElementById('modal-body').innerHTML = `Bạn có muốn xóa khóa học <b>${name}</b> không?`
-        document.getElementById('confirm-delete').setAttribute("onclick", `confirmDelete('${_id}')`);
+        document.getElementById('modal-body').innerHTML = `Bạn có muốn khôi phục khóa học <b>${name}</b> không?`
+        document.getElementById('confirm-restore').setAttribute("onclick", `confirmRestore('${_id}')`);
     }
 
-    function confirmDelete(_id) {
-        let form = document.getElementById('form-delete');
-        form.setAttribute("action", `delete/${_id}`);
+    function confirmRestore(_id) {
+        let form = document.getElementById('form-restore');
+        form.setAttribute("action", `restore/${_id}`);
         form.submit();
     }
 </script>

@@ -37,18 +37,38 @@ class CourseController {
             .catch(error => next(error));
     }
 
-    // GET show edit coure /course/edit/:videoId
+    // GET show edit coure /course/edit/:id
     editGet(req, res, next) {
-        Course.findOne({ videoId: req.params.videoId }).lean()
+        Course.findOne({ _id: req.params.id }).lean()
             .then(course => res.render('course-edit', { course: course }))
             .catch(error => next(error));
     }
 
     // POST show edit coure /course/edit
     editPost(req, res, next) {
-        //res.json(req.body._id);
         Course.updateOne({ _id: req.body._id }, req.body)
             .then(() => res.redirect('list'))
+            .catch(error => next(error));
+    }
+
+    // POST delete coure /course/delete/:id
+    delete(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(error => next(error));
+    }
+
+    // GET show all coure in trash /course/trash
+    showTrash(req, res, next) {
+        Course.findWithDeleted({ deleted: true }).lean()
+            .then(courses => res.render('list-trash', { courses: courses }))
+            .catch(error => next(error));
+    }
+
+    // POST restore coure /course/restore/:id
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
             .catch(error => next(error));
     }
 }
